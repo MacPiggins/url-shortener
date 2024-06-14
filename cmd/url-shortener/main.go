@@ -22,5 +22,10 @@ func main() {
 	// storage := flag.String("storage", "", "Storage type")
 	// link := flag.String("link", "", "DB connection link")
 	// flag.Parse()
-	app.Run(storage, link)
+	err := app.Run(storage, link)
+
+	if err != nil {
+		fmt.Println("an error occured: ", err)
+		os.Exit(1)
+	}
 }
