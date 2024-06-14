@@ -1,6 +1,6 @@
 package rest
 
-import (	
+import (
 	"url-shortener/internal/database"
 	"url-shortener/pkg/tokeniser"
 )
@@ -16,9 +16,9 @@ func CreateToken(link string, db database.Wrapper) (string, error) {
 				return "", err
 			}
 
-			if someLink == link {				
+			if someLink == link {
 				return token, nil
-			} else {				
+			} else {
 				return CreateToken(token, db)
 			}
 
@@ -34,10 +34,10 @@ func RetrieveLink(token string, db database.Wrapper) (string, error) {
 	if err != nil {
 		if _, ok := err.(database.NotFoundError); ok {
 			// TODO: return something about 404
-			return "404", err
+			return "", err
 		} else {
 			return "", err
 		}
-	}	
+	}
 	return link, err
 }

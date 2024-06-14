@@ -16,8 +16,7 @@ func New() (*NoDB, error) {
 		storage: map[string]string{}, mtx: &sync.RWMutex{}}, nil
 }
 
-func (n *NoDB) Set(token, link string) error {
-	//fmt.Println(token, link)
+func (n *NoDB) Set(token, link string) error {	
 	n.mtx.Lock()
 	defer n.mtx.Unlock()
 
@@ -26,8 +25,6 @@ func (n *NoDB) Set(token, link string) error {
 	}
 
 	n.storage[token] = link
-
-	//fmt.Println(n.storage[token])
 
 	return nil
 }
@@ -38,8 +35,7 @@ func (n *NoDB) Get(token string) (string, error) {
 
 	if _, ok := n.storage[token]; !ok {
 		return "", database.NotFoundError{}
-	}
-	//fmt.Println(n.storage[token])
+	}	
 
 	return n.storage[token], nil
 }
